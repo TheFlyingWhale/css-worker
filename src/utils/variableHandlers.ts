@@ -6,7 +6,7 @@ export type CssVariable = {
 export type CreateCssVariable = (variable: CssVariable) => string
 
 export const createCssVariable: CreateCssVariable = (variable) => {
-    return `\t--${variable.name}: #${variable.value};\n`
+    return `\t--${variable.name}: ${variable.value};\n`
 }
 
 export type CreateCssVariableCollection = (variables: CssVariable[]) => string

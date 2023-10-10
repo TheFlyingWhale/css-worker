@@ -1,9 +1,10 @@
 import { mkdirSync, existsSync, rmSync } from "fs"
 import type { FileMeta } from "@ts/types"
-import { createFile } from "@utils/creator"
+import { createFile } from "@utils/fileCreator"
 import { CssVariable } from "@utils/variableHandlers"
 import { createCssVariableCollection } from "@utils/variableHandlers"
-import { hexDigitToDecimal, hexToRGB } from "@utils/converters"
+import { hexToRGB } from "@utils/color/hex"
+import { rgbToRgbValue, rgbToRgbaValue } from "@utils/color/rgb"
 
 const myProgram = async () => {
     const dirName = "./dist"
@@ -18,24 +19,46 @@ const myProgram = async () => {
         extension: "css",
     }
 
+    const rgbTest: FileMeta = {
+        name: "rgbTest",
+        location: "./dist/",
+        extension: "css",
+    }
+
+    const rgbaTest: FileMeta = {
+        name: "rgbaTest",
+        location: "./dist/",
+        extension: "css",
+    }
+
     const variables: CssVariable[] = [
         {
             name: "red-500",
-            value: "EF4444",
+            value: "#EF4444",
         },
         {
             name: "orange-500",
-            value: "EAB308",
+            value: "#EAB308",
         },
         {
             name: "blue-500",
-            value: "3B82F6",
+            value: "#3B82F6",
         },
     ]
 
     createFile({
         meta: test,
         content: createCssVariableCollection(variables),
+    })
+
+    createFile({
+        meta: rgbTest,
+        content: rgbToRgbValue(hexToRGB("#EAB308")),
+    })
+
+    createFile({
+        meta: rgbaTest,
+        content: rgbToRgbaValue(hexToRGB("#EAB308"), 50),
     })
 
     const hexes = ["#f2f21f"]

@@ -1,3 +1,5 @@
+import { RGB } from "@ts/types"
+
 export type HexDigit =
     | 0
     | 1
@@ -39,12 +41,6 @@ const HexRegEx = /^#?[0-9A-Fa-f]{6}$/
 
 export type HexDigits = `${HexDigit}${HexDigit}`
 
-export type RGBValues = {
-    red: number
-    green: number
-    blue: number
-}
-
 export const hexDigitToDecimal = (digits: HexDigits) => {
     const firstDigit = digits[0] as HexDigit
     const secondDigit = digits[1] as HexDigit
@@ -75,7 +71,7 @@ export const validateHexcolorString = (color: string) => {
     }
 }
 
-export const hexToRGB = (color: string): RGBValues => {
+export const hexToRGB = (color: string): RGB => {
     validateHexcolorString(color)
     color = color.toLowerCase()
     const length = color.length

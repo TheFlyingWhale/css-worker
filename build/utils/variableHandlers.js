@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createCssVariableCollection = exports.createCssVariable = void 0;
 const createCssVariable = (variable) => {
-    return `\t--${variable.name}: #${variable.value};\n`;
+    return `\t--${variable.name}: ${variable.value};\n`;
 };
 exports.createCssVariable = createCssVariable;
 const createCssVariableCollection = (variables) => {

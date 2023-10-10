@@ -3,3 +3,9 @@ export type FileMeta = {
     location: string
     extension: string
 }
+
+export type RGB = {
+    red: number
+    green: number
+    blue: number
+}

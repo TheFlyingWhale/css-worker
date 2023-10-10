@@ -10,9 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
-const creator_1 = require("./utils/creator");
+const fileCreator_1 = require("./utils/fileCreator");
 const variableHandlers_1 = require("./utils/variableHandlers");
-const converters_1 = require("./utils/converters");
+const hex_1 = require("./utils/color/hex");
+const rgb_1 = require("./utils/color/rgb");
 const myProgram = () => __awaiter(void 0, void 0, void 0, function* () {
     const dirName = "./dist";
     const doesDistExist = (0, fs_1.existsSync)(dirName);
@@ -24,27 +25,45 @@ const myProgram = () => __awaiter(void 0, void 0, void 0, function* () {
         location: "./dist/",
         extension: "css",
     };
+    const rgbTest = {
+        name: "rgbTest",
+        location: "./dist/",
+        extension: "css",
+    };
+    const rgbaTest = {
+        name: "rgbaTest",
+        location: "./dist/",
+        extension: "css",
+    };
     const variables = [
         {
             name: "red-500",
-            value: "EF4444",
+            value: "#EF4444",
         },
         {
             name: "orange-500",
-            value: "EAB308",
+            value: "#EAB308",
         },
         {
             name: "blue-500",
-            value: "3B82F6",
+            value: "#3B82F6",
         },
     ];
-    (0, creator_1.createFile)({
+    (0, fileCreator_1.createFile)({
         meta: test,
         content: (0, variableHandlers_1.createCssVariableCollection)(variables),
     });
+    (0, fileCreator_1.createFile)({
+        meta: rgbTest,
+        content: (0, rgb_1.rgbToRgbValue)((0, hex_1.hexToRGB)("#EAB308")),
+    });
+    (0, fileCreator_1.createFile)({
+        meta: rgbaTest,
+        content: (0, rgb_1.rgbToRgbaValue)((0, hex_1.hexToRGB)("#EAB308"), 50),
+    });
     const hexes = ["#f2f21f"];
     hexes.forEach((hex) => {
-        console.log((0, converters_1.hexToRGB)(hex));
+        console.log((0, hex_1.hexToRGB)(hex));
     });
 });
 myProgram();
